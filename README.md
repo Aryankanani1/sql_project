@@ -1,13 +1,24 @@
-# SQL & PostgreSQL Practice Repository
+# SQL Project
+
+## Database: mini_crm (Food Delivery CRM)
+
+A MySQL-based CRM system for a food delivery startup — tracks customers, products, and orders.
 
 ## Setup
 
-1. Download and install **PostgreSQL**.
-2. Clone this repository to your local machine.
+1. Run `1. DDL_DML/DDL_DML_mysql.sql` to create the schema
+2. Run `1. DDL_DML/additional_data_mysql.sql` to load all data
 
-## How to Use
+## Database Tables
 
-1. Navigate to the relevant folders.
-2. Each folder contains SQL files for practicing different SQL commands.
-3. Open and run the SQL files in PostgreSQL to practice DDL and DML operations.
-"""
+| Table | Description |
+|-------|-------------|
+| customers | 15 customers |
+| products | 30 food items across 6 categories |
+| orders | 30 orders with status |
+| order_items | Line items linking orders to products |
+
+## Solutions
+
+Daily practice solutions are in the `solutions/` folder.
+Each file is named by date: `YYYY-MM-DD_topic.sql`
