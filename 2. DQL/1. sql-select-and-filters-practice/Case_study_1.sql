@@ -100,3 +100,79 @@ status
 FROM orders 
 WHERE status != 'Delivered';
 
+-- 12. Show products that are not priced between $4 and $6.
+-- Concept: NOT BETWEEN — excludes the range, opposite of BETWEEN
+SELECT 
+product_id,
+product_name,
+price
+FROM products 
+WHERE price NOT BETWEEN 4 AND 6;
+
+-- 13. List products not in 'Main Course', 'Snacks', or 'Beverages' categories.
+-- Concept: NOT IN — excludes multiple values, cleaner than chaining != conditions
+SELECT 
+product_id,
+product_name
+FROM products 
+WHERE category NOT IN ('Main Course','Snacks','Beverages');
+
+-- 14. Find customers whose names don't start with 'S'.
+-- Concept: NOT LIKE — negates a pattern match
+SELECT 
+customer_id,
+full_name
+FROM customers 
+WHERE full_name NOT LIKE 'S%';
+
+-- 15. Find 'total_price' for each order item (quantity * unit_price).
+-- Concept: Derived/calculated column — arithmetic inside SELECT creates a new column on the fly
+SELECT 
+order_item_id,
+order_id,
+product_id,
+quantity,
+quantity * unit_price
+FROM order_items;
+
+-- 16. List the top 10 most expensive products, sorted descending by price.
+-- Concept: ORDER BY DESC + LIMIT — sort first, then cap the rows returned
+SELECT 
+product_id,
+product_name,
+category,
+price 
+FROM products 
+ORDER BY price DESC
+LIMIT 1;
+
+-- 17. Show customers sorted alphabetically by name.
+-- Concept: ORDER BY ASC (default) — alphabetical sort on a text column
+SELECT 
+customer_id,
+full_name,
+email,
+phone
+FROM customers 
+ORDER BY full_name ASC;
+
+-- 18. Show the 5 most recent customers based on 'created_at'.
+-- Concept: ORDER BY timestamp DESC + LIMIT — newest records come first
+SELECT 
+customer_id,
+full_name,
+created_at
+FROM customers 
+ORDER BY created_At DESC
+LIMIT 5;
+
+
+-- 19. Display any 3 random products.
+-- Concept: ORDER BY RAND() LIMIT 3 — non-deterministic sort, different result each run
+SELECT 
+product_id,
+product_name,
+category
+FROM products 
+ORDER BY RAND()
+LIMIT 3;
