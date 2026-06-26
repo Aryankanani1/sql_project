@@ -3,24 +3,64 @@
 
 -- 1. Retrieve a list of all distinct product categories.
 -- Concept: DISTINCT — removes duplicate values, returns only unique entries
+USE mini_crm;
+SELECT 
+DISTINCT category
+FROM products;
 
 -- 2. Show all product names in uppercase.
 -- Concept: UPPER() string function — transforms text to all caps; useful for normalizing output
-
+SELECT 
+product_id,
+upper(product_name) AS product_name
+FROM products;
 -- 3. Select all customers who have not provided a phone number.
 -- Concept: IS NULL filter — same as case study 1 Q6; reinforces that NULL != empty string
-
+SELECT
+customer_id,
+full_name,
+email
+FROM customers 
+WHERE phone IS NULL;
 -- 4. Show the first 5 customers sorted alphabetically by name.
 -- Concept: ORDER BY + LIMIT — sort first, then slice the top N rows
-
+SELECT 
+customer_id,
+full_name,
+email
+FROM customers 
+ORDER BY full_name ASC
+LIMIT 5;
 -- 5. Show the 6th to 10th customers alphabetically.
 -- Concept: LIMIT with OFFSET — LIMIT 5 OFFSET 5 skips the first 5 rows (pagination)
-
+SELECT 
+customer_id,
+full_name,
+email
+FROM customers 
+ORDER BY full_name ASC 
+LIMIT 5 OFFSET 5;
 -- 6. Show products with a price between $5 and $15.
 -- Concept: BETWEEN — inclusive range filter; equivalent to price >= 5 AND price <= 15
+SELECT 
+product_id,
+product_name,
+price
+FROM products 
+WHERE price BETWEEN 5 AND 15;
 
 -- 7. List orders and label them as "High" if total_amount > $50, "Medium" if between $20-$50, and "Low" otherwise.
 -- Concept: CASE WHEN — conditional logic inside SELECT; think of it as an if/else for SQL columns
+SELECT 
+order_id,
+order_date,
+total_amount,
+CASE 
+	WHEN total_amount > 50 THEN 'High'
+	WHEN total_amount BETWEEN 20 AND 50 THEN 'Medium'
+	ELSE 'Low'
+END AS 'tag'
+FROM orders;
 
 -- 8. Display orders with total_amount NULL, and replace it with 0.
 -- Concept: IFNULL(col, fallback) — MySQL's shorthand for replacing NULL with a default value
