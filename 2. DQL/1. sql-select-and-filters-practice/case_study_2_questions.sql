@@ -64,15 +64,40 @@ FROM orders;
 
 -- 8. Display orders with total_amount NULL, and replace it with 0.
 -- Concept: IFNULL(col, fallback) — MySQL's shorthand for replacing NULL with a default value
+SELECT
+order_id,
+customer_id,
+IFNULL(total_amount, 0) AS total_amount
+FROM orders 
+
 
 -- 9. Show full_name and the first word from their name only.
 -- Concept: SUBSTRING_INDEX(str, delimiter, count) — splits a string and returns the part before the first space
+SELECT full_name, SUBSTRING_INDEX(full_name, ' ', 1) AS first_name FROM customers;
+
 
 -- 10. Show all orders placed today (assume CURRENT_DATE).
 -- Concept: CURDATE() / CURRENT_DATE — date function; compare order_date to today's date
+SELECT 
+order_id,
+customer_id,
+order_date
+FROM orders 
+WHERE order_date = curdate();
 
 -- 11. List orders sorted by priority: Delivered > Confirmed > Shipped > Pending.
 -- Concept: ORDER BY CASE WHEN — custom sort order; assign a numeric rank to each status value
+SELECT 
+order_id,
+customer_id,
+order_date,
+status
+FROM orders 
+ORDER BY CASE 
+WHEN status = 'Delivered' THEN 1
+WHEN status = 'Confirmed' THEN 2
+WHEN status = 'Shipped' THEN 3
+ELSE 4 END
 
 -- 12. Show current date, and how many days ago each order was placed.
 -- Concept: DATEDIFF(date1, date2) — returns the number of days between two dates
