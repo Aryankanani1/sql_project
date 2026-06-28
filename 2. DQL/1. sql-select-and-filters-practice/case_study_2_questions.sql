@@ -101,12 +101,36 @@ ELSE 4 END
 
 -- 12. Show current date, and how many days ago each order was placed.
 -- Concept: DATEDIFF(date1, date2) — returns the number of days between two dates
+SELECT 
+order_id,
+customer_id,
+curdate() AS currentdate,
+DATEDIFF(curdate(),order_date) 
+FROM orders;
 
 -- 13. Show a list of customers with NULL phone numbers labeled as 'Missing'.
 -- Concept: IFNULL() or COALESCE() — replace NULL with a display label in the output
-
+SELECT 
+customer_id,
+full_name,
+email,
+coalesce(phone, 'missing')
+FROM customers;
 -- 14. List products whose name contains the word 'Pizza'.
 -- Concept: LIKE '%keyword%' — wildcard on both sides matches the pattern anywhere in the string
+-- Concept: LIKE '%keyword%' — wildcard on both sides matches the pattern anywhere in the string
+SELECT 
+product_id,
+product_name,
+category
+FROM products 
+WHERE product_name LIKE '%Pizza%'
+
 
 -- 15. Display total number of characters in each product name.
 -- Concept: CHAR_LENGTH(str) — returns character count; use instead of LENGTH() for multi-byte safety
+SELECT 
+product_id,
+product_name,
+character_length(product_name) AS total_char
+FROM products 
