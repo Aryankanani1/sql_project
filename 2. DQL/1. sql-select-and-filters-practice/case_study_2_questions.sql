@@ -68,7 +68,7 @@ SELECT
 order_id,
 customer_id,
 IFNULL(total_amount, 0) AS total_amount
-FROM orders 
+FROM orders;
 
 
 -- 9. Show full_name and the first word from their name only.
@@ -97,7 +97,7 @@ ORDER BY CASE
 WHEN status = 'Delivered' THEN 1
 WHEN status = 'Confirmed' THEN 2
 WHEN status = 'Shipped' THEN 3
-ELSE 4 END
+ELSE 4 END;
 
 -- 12. Show current date, and how many days ago each order was placed.
 -- Concept: DATEDIFF(date1, date2) — returns the number of days between two dates
@@ -118,13 +118,12 @@ coalesce(phone, 'missing')
 FROM customers;
 -- 14. List products whose name contains the word 'Pizza'.
 -- Concept: LIKE '%keyword%' — wildcard on both sides matches the pattern anywhere in the string
--- Concept: LIKE '%keyword%' — wildcard on both sides matches the pattern anywhere in the string
 SELECT 
 product_id,
 product_name,
 category
 FROM products 
-WHERE product_name LIKE '%Pizza%'
+WHERE product_name LIKE '%Pizza%';
 
 
 -- 15. Display total number of characters in each product name.
@@ -133,4 +132,4 @@ SELECT
 product_id,
 product_name,
 character_length(product_name) AS total_char
-FROM products 
+FROM products;
