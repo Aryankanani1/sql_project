@@ -28,8 +28,37 @@ MIN(total_amount) AS lowest_order,
 AVG(total_amount) AS average_order
 FROM orders;
 -- Q5. How many products are available in each category?
+SELECT 
+category,
+COUNT(product_name) 
+FROM products 
+GROUP BY category;
 -- Q6. What is the average price of products in each category?
+SELECT 
+category,
+ROUND(AVG(price),2) AS average_price
+FROM products
+GROUP BY category;
 -- Q7. Find the highest and lowest price among all products.
+SELECT 
+MAX(price) AS highest_price,
+MIN(price) AS lowest_price
+FROM products;
 -- Q8. How many units of each product_id were sold (based on order_items)?
+SELECT
+product_id,
+SUM(quantity)
+FROM order_items
+GROUP BY product_id;
 -- Q9. What is the average unit price for each product_id in order_items?
+SELECT 
+product_id,
+ROUND(AVG(unit_price),2) AS average_unit_price
+FROM order_items 
+GROUP BY product_id;
 -- Q10. How many times was each product_id ordered (count of appearances in order_items)?
+SELECT 
+product_id,
+COUNT(product_id) 
+FROM order_items 
+GROUP BY product_id;
